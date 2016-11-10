@@ -1,0 +1,92 @@
+﻿===========================================================================================
+ERRORS
+===========================================================================================
+
+	-addresses table
+		-delete
+			-CONSTRAINT [FK_dbo.Addresses_dbo.AspNetUsers_ApplicationUser_Id] FOREIGN KEY ([ApplicationUserId]) REFERENCES [dbo].[AspNetUsers] ([Id])
+
+===========================================================================================
+HIGH
+===========================================================================================
+
+	-for following models, bootstrap
+		-Classes & Status:
+			-Address			-> OK
+			-Vehicle			-> OK
+			-Request 
+				-Actions:
+					-create - (get)	-> NEXT (upload photo)	
+					-create - (post)
+					-index
+					-details	
+			-Photo	
+				-Actions:
+					-create	- on request	
+					-create - on request
+					-index
+					-details		
+			-User	
+				-Actions:
+					-create - NA		
+					-create - NA
+					-index	- NA
+					-details			
+
+	-'create' request flow:
+		-save files 
+			-save on table Photos
+				-saveToTable()
+		-divide code my methods
+
+	-what happens on delete of each model
+		-Vehicle
+			-nothing
+		-Photo
+			-nothing
+		-Request
+			-delete photos
+		-Address
+			-nothing
+
+	-fields added to db and not yet on mode, ctrl, and views 
+		-Review on all models advised
+		-Request
+			-AddressId
+
+===========================================================================================
+MEDIUM
+===========================================================================================
+
+	-validations for invalid GET params on Actions
+		-details
+		-delete
+		-edit
+			-ex:address/details/t2
+
+	-for each class in model
+		-controller & views:	
+			-delete - (get)
+			-delete - (post)
+			-edit	- (get)
+			-edit	- (post)
+
+===========================================================================================
+LOW
+===========================================================================================
+
+
+
+===========================================================================================
+DOCS
+===========================================================================================
+
+	https://docs.asp.net/en/latest/index.html
+
+===========================================================================================
+WHEN UPLOADING FILES TO SERVER
+===========================================================================================
+
+	-change
+		-PhotoService.cs
+			-SaveFiles()
