@@ -59,12 +59,19 @@ namespace Shypp.Models
         public virtual ICollection<Photo> Photos { get; set; }
         public virtual ApplicationUser User { get; set; }
 
+        // ----------------------------------------
+
         [ForeignKey("AddressOriginId")]
         public virtual Address AddressOrigin { get; set; }
+
+        // ----------------------------------------
 
         [ForeignKey("AddressDestinyId")]
         public virtual Address AddressDestiny { get; set; }
 
+        // ----------------------------------------
+
+        public virtual ICollection<Commit> Commits { get; set; }
 
     }
 }

@@ -26,10 +26,11 @@ namespace Shypp.Models
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Commit> Commits { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
-            
+
         //    modelBuilder.Entity<Request>()
         //        .HasRequired(r => r.AddressOrigin)
         //        .WithMany(a => a.RequestsOrigin)

@@ -197,6 +197,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\CommitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhotoController.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\Commit.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Photo.cs" />
@@ -220,6 +222,7 @@
     <Compile Include="Models\Vehicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\PhotoService.cs" />
+    <Compile Include="Services\RequestService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -333,11 +336,13 @@
     <Content Include="Views\Vehicle\Create.cshtml" />
     <Content Include="Views\Vehicle\Index.cshtml" />
     <Content Include="Views\Vehicle\Details.cshtml" />
-    <Content Include="Views\Request\Create.cshtml" />
     <Content Include="Views\Request\Index.cshtml" />
     <Content Include="Views\Request\Details.cshtml" />
     <Content Include="Views\Photo\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\View.cshtml" />
+    <Content Include="Views\Commit\Index.cshtml" />
+    <Content Include="Views\Request\Create.cshtml" />
+    <Content Include="Views\Commit\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

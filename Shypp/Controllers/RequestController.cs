@@ -34,6 +34,9 @@ namespace Shypp.Controllers
         public ActionResult Details(int id)
         {
             var request = db.Requests.Find(id);
+            var photoService = new PhotoService();
+            var photos = photoService.getPhotosByRequest(id);
+            ViewBag.photos = photos;
             if (request == null)
             {
                 return RedirectToAction("Index");
@@ -57,7 +60,7 @@ namespace Shypp.Controllers
                 ViewBag.Errors = TempData["Errors"].ToString();
             }
 
-            if(TempData["Success"] != null)
+            if (TempData["Success"] != null)
             {
                 ViewBag.Success = TempData["Success"].ToString();
             }
@@ -72,7 +75,6 @@ namespace Shypp.Controllers
 
         // ---------------------------------------------------------------------------------------
 
-        // http://www.mikesdotnetting.com/article/259/asp-net-mvc-5-with-ef-6-working-with-files
         // POST: Request/Create
         [HttpPost]
         public ActionResult Create(IEnumerable<HttpPostedFileBase> Files)
@@ -105,34 +107,13 @@ namespace Shypp.Controllers
 
             try
             {
-                var req = new Request();
-
-                req.MaxDaysResponse = maxDaysResponse;
-                req.ApplicationUserId = userId;
-                req.AddressOriginId = addressOriginId;
-                req.AddressDestinyId = addressDestinyId;
-
-                db.Requests.Add(req);
-                db.SaveChanges();
-
-                Request requestOnDB = db.Requests
-                    .Where(r =>
-                    r.ApplicationUserId == userId &&
-                    r.AddressOriginId == addressOriginId &&
-                    r.AddressDestinyId == addressDestinyId &&
-                    r.MaxDaysResponse == maxDaysResponse)
-                    .ToList()
-                    .FirstOrDefault();
-
-                int requestId = requestOnDB.Id;
-
-                if (photoService.SaveFiles(Files, Server, requestId) == false)
+                if (Store(Files, userId, maxDaysResponse, addressOriginId, addressDestinyId) == true)
                 {
-                    TempData["Errors"] = "Failed to save files!";
+                    TempData["Success"] = "Successfully created request!";
                 }
                 else
                 {
-                    TempData["Success"] = "Successfully created request!";
+                    TempData["Errors"] = "Failed to save files!";
                 }
 
                 return RedirectToAction("Create");
@@ -145,42 +126,8 @@ namespace Shypp.Controllers
 
         }
 
+
         // ---------------------------------------------------------------------------------------
-
-        private List<string> validatePhotosOnCreate(IEnumerable<HttpPostedFileBase> Files)
-        {
-            var errorMsg = "";
-            var errorMsgs = new List<string>();
-            var photoService = new PhotoService();
-
-            if (photoService.ValidNumberFilesPosted(Files) == false)
-            {
-                errorMsg = "Number of files to upload has to be smaller of equal to " + photoService.GetMaxFilesUpload().ToString() + "!";
-                errorMsgs.Add(errorMsg);
-            }
-
-            if (photoService.ValidFilesExtensions(Files) == false)
-            {
-                errorMsg = "File(s) with invalid extension! Accepts: " + photoService.GetAcceptedExtensionsToString() + ".";
-                errorMsgs.Add(errorMsg);
-            }
-            return errorMsgs;
-
-        }
-
-        private List<string> validateAddressesOnCreate(string OriginId, string DestinyId)
-        {
-            var errorMsg = "";
-            var errorMsgs = new List<string>();
-
-            if (OriginId == DestinyId)
-            {
-                errorMsg = "Origin has to be different than Destiny.";
-                errorMsgs.Add(errorMsg);
-            }
-
-            return errorMsgs;
-        }
 
         // GET: Request/Edit/5
         public ActionResult Edit(int id)
@@ -233,6 +180,77 @@ namespace Shypp.Controllers
         }
 
         // ---------------------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------------------
+        // Helpers
+        // ---------------------------------------------------------------------------------------
+        // ---------------------------------------------------------------------------------------
+
+        private List<string> validatePhotosOnCreate(IEnumerable<HttpPostedFileBase> Files)
+        {
+            var errorMsg = "";
+            var errorMsgs = new List<string>();
+            var photoService = new PhotoService();
+
+            if (photoService.ValidNumberFilesPosted(Files) == false)
+            {
+                errorMsg = "Number of files to upload has to be smaller of equal to " + photoService.GetMaxFilesUpload().ToString() + "!";
+                errorMsgs.Add(errorMsg);
+            }
+
+            if (photoService.ValidFilesExtensions(Files) == false)
+            {
+                errorMsg = "File(s) with invalid extension! Accepts: " + photoService.GetAcceptedExtensionsToString() + ".";
+                errorMsgs.Add(errorMsg);
+            }
+            return errorMsgs;
+
+        }
+
+        // ---------------------------------------------------------------------------------------
+
+        private List<string> validateAddressesOnCreate(string OriginId, string DestinyId)
+        {
+            var errorMsg = "";
+            var errorMsgs = new List<string>();
+
+            if (OriginId == DestinyId)
+            {
+                errorMsg = "Origin has to be different than Destiny.";
+                errorMsgs.Add(errorMsg);
+            }
+
+            return errorMsgs;
+        }
+
+        // ---------------------------------------------------------------------------------------
+
+        private bool Store(IEnumerable<HttpPostedFileBase> Files, string userId, int maxDaysResponse, int addressOriginId, int addressDestinyId)
+        {
+            var photoService = new PhotoService();
+            var req = new Request();
+
+            req.MaxDaysResponse = maxDaysResponse;
+            req.ApplicationUserId = userId;
+            req.AddressOriginId = addressOriginId;
+            req.AddressDestinyId = addressDestinyId;
+
+            db.Requests.Add(req);
+            db.SaveChanges();
+
+            Request requestOnDB = db.Requests
+                .Where(r =>
+                r.ApplicationUserId == userId &&
+                r.AddressOriginId == addressOriginId &&
+                r.AddressDestinyId == addressDestinyId &&
+                r.MaxDaysResponse == maxDaysResponse)
+                .ToList()
+                .FirstOrDefault();
+
+            int requestId = requestOnDB.Id;
+
+            return photoService.SaveFiles(Files, Server, requestId);
+
+        }
 
     }
 }

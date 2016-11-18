@@ -14,32 +14,20 @@ HIGH
 		-Classes & Status:
 			-Address			-> OK
 			-Vehicle			-> OK
-			-Request 
-				-Actions:
-					-create - (get)	-> NEXT (upload photo)	
-					-create - (post)
-					-index
-					-details	
-			-Photo	
-				-Actions:
-					-create	- on request	
-					-create - on request
-					-index
-					-details		
-			-User	
-				-Actions:
-					-create - NA		
-					-create - NA
-					-index	- NA
-					-details			
+			-Request			-> OK	
+			-Photo				-> NA
+			-User				-> NA
+			-Commit	
+				-home index		
+					-search bar with angular	
+					-link to commit in request details page			
+				-create - get	-
+				-create - post	-
+				-index			-
+				-details		-
 
-	-'create' request flow:
-		-save files 
-			-save on table Photos
-				-saveToTable()
-		-divide code my methods
 
-	-what happens on delete of each model
+	-ON DELETE
 		-Vehicle
 			-nothing
 		-Photo
@@ -48,11 +36,6 @@ HIGH
 			-delete photos
 		-Address
 			-nothing
-
-	-fields added to db and not yet on mode, ctrl, and views 
-		-Review on all models advised
-		-Request
-			-AddressId
 
 ===========================================================================================
 MEDIUM
@@ -90,3 +73,4 @@ WHEN UPLOADING FILES TO SERVER
 	-change
 		-PhotoService.cs
 			-SaveFiles()
+		-views/request/details.cshtml

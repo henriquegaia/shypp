@@ -19,12 +19,40 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.MaxTimeResponse)
+            @Html.DisplayNameFor(model => model.MaxDaysResponse)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MaxTimeResponse)
+            @Html.DisplayFor(model => model.MaxDaysResponse)
         </dd>
+
+        <dt>
+            Destiny&nbsp
+            @Html.DisplayNameFor(model => model.AddressDestiny.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressDestiny.City)
+        </dd>
+
+        <dt>
+            Origin&nbsp
+            @Html.DisplayNameFor(model => model.AddressOrigin.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AddressOrigin.City)
+        </dd>
+
+        @foreach (var photo in ViewBag.photos)
+        {
+            <dt>
+                Photo
+            </dt>
+            <dd>
+                @photo.FileName
+            </dd>
+        }
 
     </dl>
 </div>

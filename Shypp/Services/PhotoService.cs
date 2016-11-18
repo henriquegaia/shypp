@@ -41,10 +41,23 @@ namespace Shypp.Services
             {
                 if (File.ContentLength > 0)
                 {
-                    var fileName = Path.GetFileName(File.FileName);
-                    var path = Path.Combine(Server.MapPath(subPath), fileName);
-                    File.SaveAs(path);
-                    saveToTable();
+                    try
+                    {
+                        var fileName = Path.GetFileName(File.FileName);
+                        var path = Path.Combine(Server.MapPath(subPath), fileName);
+                        File.SaveAs(path);
+                        var photo = new Photo()
+                        {
+                            FileName = fileName,
+                            RequestId = requestId
+                        };
+                        db.Photos.Add(photo);
+                        db.SaveChanges();
+                    }
+                    catch
+                    {
+                        return false;
+                    }
                 }
                 else
                 {
@@ -52,12 +65,6 @@ namespace Shypp.Services
                 }
 
             }
-            return true;
-        }
-
-        private bool saveToTable()
-        {
-            //TODO: save photo
             return true;
         }
 
@@ -96,12 +103,21 @@ namespace Shypp.Services
 
             return true;
         }
+
         // ---------------------------------------------------------------------------------------
 
         public string GetAcceptedExtensionsToString()
         {
             var result = String.Join(", ", AcceptedExtensions.ToArray());
             return result;
+        }
+
+        // ---------------------------------------------------------------------------------------
+
+        public List<Photo> getPhotosByRequest(int requestId)
+        {
+            List<Photo> photos = db.Photos.Where(p => p.RequestId == requestId).ToList();
+            return photos;
         }
 
 

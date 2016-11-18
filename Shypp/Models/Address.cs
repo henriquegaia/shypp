@@ -35,8 +35,12 @@ namespace Shypp.Models
          */
         public virtual ApplicationUser User { get; set; }
 
+        // ----------------------------------------
+
         [InverseProperty("AddressOrigin")]
         public virtual ICollection<Request> RequestsOrigin { get; set; }
+
+        // ----------------------------------------
 
         [InverseProperty("AddressDestiny")]
         public virtual ICollection<Request> RequestsDestiny { get; set; }

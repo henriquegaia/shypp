@@ -5,6 +5,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shypp.Models
 {
@@ -28,6 +30,11 @@ namespace Shypp.Models
         public virtual ICollection<Address> Addresses { get; set; }
         public virtual ICollection<Vehicle> Vehicles { get; set; }
         public virtual ICollection<Request> Requests { get; set; }
+
+        // ----------------------------------------
+
+        [InverseProperty("Courier")]
+        public virtual ICollection<Commit> Commits { get; set; }
     }
 
 
