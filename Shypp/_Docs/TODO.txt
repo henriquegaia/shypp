@@ -6,6 +6,16 @@ ERRORS
 		-delete
 			-CONSTRAINT [FK_dbo.Addresses_dbo.AspNetUsers_ApplicationUser_Id] FOREIGN KEY ([ApplicationUserId]) REFERENCES [dbo].[AspNetUsers] ([Id])
 
+	-when adding the next route, others like request/details/xx stop working
+
+		    routes.MapRoute(
+				name: "CreateCommit",
+				url: "{controller}/{action}/{requestId}",
+				defaults: new { controller = "Commit", action = "Create" },
+				constraints: new { requestId = @"\d+" }
+            );
+
+
 ===========================================================================================
 HIGH
 ===========================================================================================
@@ -18,11 +28,10 @@ HIGH
 			-Photo				-> NA
 			-User				-> NA
 			-Commit	
-				-home index		
-					-search bar with angular	
-					-link to commit in request details page			
-				-create - get	-
-				-create - post	-
+				-home index			
+				-add	- get	-
+				-add	- post	-
+						- store commit
 				-index			-
 				-details		-
 

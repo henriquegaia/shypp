@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 
 namespace Shypp.Controllers
 {
+    [Authorize]
     public class CommitController : Controller
     {
 
@@ -27,27 +28,51 @@ namespace Shypp.Controllers
             return View();
         }
 
-        // GET: Commit/Create/5
-        public ActionResult Create(int requestId)
+        // GET: Commit/Add/5
+        [Route("commit/add/{requestId}")]
+        public ActionResult Add(int requestId)
         {
-            return Content(requestId.ToString());
+            TempData["requestId"] = requestId;
             return View();
         }
 
-        // POST: Commit/Create
+        // POST: Commit/Add
+        [Route("commit/add/{requestId}")]
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Add(Commit commit)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                return Content("model not valid");
+                ViewData["Errors"] = "All the fields are required!";
+                return RedirectToAction("Add");
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var rRequestId = Request["requestId"];
+
+            var rStart = Request["Start"];
+
+            var rDurationMinutes = Request["DurationMinutes"];
+
+            var rPriceEuros = Request["PriceEuros"];
+
+            if (rStart == "" || rDurationMinutes == "" || rPriceEuros == "")
             {
-                return View();
+                ViewData["Errors"] = "All the fields are required!";
+                return RedirectToAction("Add");
             }
+
+            DateTime rStartDate = DateTime.Parse(rStart);
+
+            if (rStartDate < DateTime.Now)
+            {
+                ViewData["Errors"] = "Invalid date!";
+                return RedirectToAction("Add");
+            }
+
+            ViewData["Success"] = "Invalid date!";
+            return RedirectToAction("Add");
+
         }
 
         // GET: Commit/Edit/5

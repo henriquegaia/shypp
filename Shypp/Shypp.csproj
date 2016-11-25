@@ -275,6 +275,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\angularjs\app.js" />
+    <Content Include="Scripts\angularjs\controllers\generalController.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -340,9 +343,8 @@
     <Content Include="Views\Request\Details.cshtml" />
     <Content Include="Views\Photo\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\View.cshtml" />
-    <Content Include="Views\Commit\Index.cshtml" />
     <Content Include="Views\Request\Create.cshtml" />
-    <Content Include="Views\Commit\Create.cshtml" />
+    <Content Include="Views\Commit\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -359,6 +361,9 @@
     <EmbeddedResource Include="Migrations\201610131902070_AddressIdInRequestNoDeleteCascade.resx">
       <DependentUpon>201610131902070_AddressIdInRequestNoDeleteCascade.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

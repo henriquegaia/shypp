@@ -44,6 +44,14 @@
             @Html.DisplayFor(model => model.AddressOrigin.City)
         </dd>
 
+        <dt>
+            @Html.DisplayNameFor(model=>model.PriceEuros)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model=>model.PriceEuros)
+        </dd>
+
         @foreach (var photo in ViewBag.photos)
         {
             <dt>

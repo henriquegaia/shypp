@@ -30,18 +30,23 @@ namespace Shypp.Models
 
         // ----------------------------------------
 
+        //https://www.asp.net/mvc/overview/older-versions/using-the-html5-and-jquery-ui-datepicker-popup-calendar-with-aspnet-mvc/using-the-html5-and-jquery-ui-datepicker-popup-calendar-with-aspnet-mvc-part-4
         [Required]
-        public int DistanceToOriginKm { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime Start { get; set; }
 
         // ----------------------------------------
 
         [Required]
-        public int ExpectedDurationMin { get; set; }
+        [Display(Name = "Duration (minutes)")]
+        public int DurationMinutes { get; set; }
 
         // ----------------------------------------
 
         [Required]
-        public float Price { get; set; }
+        [Display(Name = "Price (Euros)")]
+        [Range(1, 1000)]
+        public float PriceEuros { get; set; }
 
         /*
          * ----------------------------------------

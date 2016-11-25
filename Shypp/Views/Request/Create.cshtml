@@ -37,8 +37,8 @@
                 How long (<u>days</u>) are you willing to wait for a <b>response</b>?
             </label>
             <div class="col-md-10">
-                <input type="number" name="MaxDaysResponse" class="form-control" data-val-required="The MaxDaysResponse field is required." />
-                <span class="field-validation-valid text-danger" data-valmsg-for="MaxDaysResponse" data-valmsg-replace="true"></span>
+                @Html.EditorFor(model => model.MaxDaysResponse, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MaxDaysResponse, "", new { @class = "text-danger" })
             </div>
         </div>
         <hr />
@@ -85,6 +85,19 @@
         </div>
         <hr />
 
+        <!-- PRICE --------------------------------------------------------------------- -->
+
+        <div class="form-group">
+            <label class="col-md-2 control-label">
+                Price (Euros)
+            </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PriceEuros, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PriceEuros, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <hr />
+
         <!-- PHOTOS -------------------------------------------------------------------- -->
 
         <div class="form-group">
@@ -99,6 +112,8 @@
         </div>
         <hr />
 
+
+
         <!-- NEW ADDRESS --------------------------------------------------------------- -->
 
         <div class="form-group">
@@ -110,6 +125,8 @@
             </div>
         </div>
         <hr />
+
+
 
         <!-- SUBMIT -------------------------------------------------------------------- -->
 

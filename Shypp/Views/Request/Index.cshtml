@@ -17,6 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.MaxDaysResponse)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriceEuros)
+        </th>
         <th></th>
     </tr>
 
@@ -27,6 +30,9 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.MaxDaysResponse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PriceEuros)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

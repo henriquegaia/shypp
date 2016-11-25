@@ -83,6 +83,7 @@ namespace Shypp.Controllers
             var rMaxDaysResponse = Request["MaxDaysResponse"];
             var rAddressOriginId = Request["Address.Origin.Id"];
             var rAddressDestinyId = Request["Address.Destiny.Id"];
+            var rPriceEuros = Request["PriceEuros"];
             var photoService = new PhotoService();
 
             List<string> errorMsgsAddresses = validateAddressesOnCreate(rAddressOriginId, rAddressDestinyId);
@@ -104,10 +105,11 @@ namespace Shypp.Controllers
             int maxDaysResponse = Convert.ToInt32(rMaxDaysResponse);
             int addressOriginId = int.Parse(rAddressOriginId);
             int addressDestinyId = int.Parse(rAddressDestinyId);
+            float priceEuros = int.Parse(rPriceEuros);
 
             try
             {
-                if (Store(Files, userId, maxDaysResponse, addressOriginId, addressDestinyId) == true)
+                if (Store(Files, userId, maxDaysResponse, addressOriginId, addressDestinyId, priceEuros) == true)
                 {
                     TempData["Success"] = "Successfully created request!";
                 }
@@ -224,7 +226,7 @@ namespace Shypp.Controllers
 
         // ---------------------------------------------------------------------------------------
 
-        private bool Store(IEnumerable<HttpPostedFileBase> Files, string userId, int maxDaysResponse, int addressOriginId, int addressDestinyId)
+        private bool Store(IEnumerable<HttpPostedFileBase> Files, string userId, int maxDaysResponse, int addressOriginId, int addressDestinyId, float priceEuros)
         {
             var photoService = new PhotoService();
             var req = new Request();
@@ -233,6 +235,7 @@ namespace Shypp.Controllers
             req.ApplicationUserId = userId;
             req.AddressOriginId = addressOriginId;
             req.AddressDestinyId = addressDestinyId;
+            req.PriceEuros = priceEuros;
 
             db.Requests.Add(req);
             db.SaveChanges();
