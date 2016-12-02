@@ -39,6 +39,7 @@ namespace Shypp.Models
 
         [Required]
         [Display(Name = "Duration (minutes)")]
+        [Range(1, 1000)]
         public int DurationMinutes { get; set; }
 
         // ----------------------------------------
@@ -47,6 +48,10 @@ namespace Shypp.Models
         [Display(Name = "Price (Euros)")]
         [Range(1, 1000)]
         public float PriceEuros { get; set; }
+
+        // ----------------------------------------
+
+        public int DeliveryId { get; set; }
 
         /*
          * ----------------------------------------
@@ -60,6 +65,10 @@ namespace Shypp.Models
         // ----------------------------------------
 
         public virtual Request Request { get; set; }
+
+        // ----------------------------------------
+
+        public virtual Delivery Delivery { get; set; }
 
     }
 }

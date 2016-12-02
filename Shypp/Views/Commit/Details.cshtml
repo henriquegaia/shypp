@@ -1,0 +1,89 @@
+﻿@model Shypp.Models.Commit
+
+<div>
+    <h4>Commit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Request.User.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Request.User.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Executed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Executed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Accepted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Accepted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Start)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Start)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DurationMinutes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DurationMinutes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceEuros)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceEuros)
+        </dd>
+
+        <dt>
+            Origin
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Request.AddressOrigin.City)
+        </dd>
+
+        <dt>
+            Destiny
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Request.AddressDestiny.City)
+        </dd>
+
+        <dd>
+
+        <p></p>
+
+        </dd>
+
+        <dt>
+            @Html.ActionLink("Request", "Details", "Request", new { id = Model.Request.Id }, null)
+        </dt>
+
+        <p></p>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

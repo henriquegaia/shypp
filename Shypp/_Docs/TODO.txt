@@ -20,6 +20,8 @@ ERRORS
 HIGH
 ===========================================================================================
 
+	-model Delivery
+
 	-for following models, bootstrap
 		-Classes & Status:
 			-Address			-> OK
@@ -27,13 +29,7 @@ HIGH
 			-Request			-> OK	
 			-Photo				-> NA
 			-User				-> NA
-			-Commit	
-				-home index			
-				-add	- get	-
-				-add	- post	-
-						- store commit
-				-index			-
-				-details		-
+			-Commit				-> OK	
 
 
 	-ON DELETE

@@ -1,5 +1,31 @@
 ﻿@model Shypp.Models.Commit
 
+<!--------------------------------------------------------------------- -->
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<!--------------------------------------------------------------------- -->
+
+@if (TempData["Errors"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Errors"]
+    </div>
+}
+
+<!--------------------------------------------------------------------- -->
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        You have successfully submitted a commit!
+    </div>
+}
+
+<!--------------------------------------------------------------------- -->
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -7,22 +33,9 @@
     <div class="form-horizontal">
         <h4>Commit</h4>
         <hr />
-
-        @if (ViewData["Errors"] != null)
-        {
-            <div class="alert alert-danger">
-                @ViewData["Errors"]
-            </div>
-        }
-
-        @if (ViewData["Success"] != null)
-        {
-            <div class="alert alert-danger">
-                You have successfully submitted a commit!
-            </div>
-        }
-
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <!--------------------------------------------------------------------- -->
 
         <div class="form-group">
             @Html.LabelFor(model => model.Start, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -32,6 +45,8 @@
             </div>
         </div>
 
+        <!--------------------------------------------------------------------- -->
+
         <div class="form-group">
             @Html.LabelFor(model => model.DurationMinutes, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -39,6 +54,8 @@
                 @Html.ValidationMessageFor(model => model.DurationMinutes, "", new { @class = "text-danger" })
             </div>
         </div>
+
+        <!--------------------------------------------------------------------- -->
 
         <div class="form-group">
             @Html.LabelFor(model => model.PriceEuros, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -48,17 +65,26 @@
             </div>
         </div>
 
+        <!--------------------------------------------------------------------- -->
+
         <div>
             <input type="hidden" name="requestId" value="@TempData["requestId"]" />
         </div>
+
+        <!--------------------------------------------------------------------- -->
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Add" class="btn btn-default" />
             </div>
         </div>
+
+        <!--------------------------------------------------------------------- -->
+
     </div>
 }
+
+<!--------------------------------------------------------------------- -->
 
 <div>
     @Html.ActionLink("Back to List", "Index")

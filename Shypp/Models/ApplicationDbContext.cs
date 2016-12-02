@@ -27,6 +27,7 @@ namespace Shypp.Models
         public DbSet<Request> Requests { get; set; }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Commit> Commits { get; set; }
+        public DbSet<Delivery> Deliveries { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

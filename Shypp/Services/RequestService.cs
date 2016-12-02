@@ -14,7 +14,7 @@ namespace Shypp.Services
 
         public List<Request> getAllExceptFromLoggedUser(bool userIsAuth, string userId)
         {
-            
+
             List<Request> requests = new List<Request>();
             if (userIsAuth == false)
             {
@@ -22,9 +22,17 @@ namespace Shypp.Services
             }
             else
             {
-                requests = db.Requests.Where(r=>r.ApplicationUserId != userId).ToList();
+                requests = db.Requests.Where(r => r.ApplicationUserId != userId).ToList();
             }
             return requests;
+        }
+
+        public string getUserIdFromRequestId(int requestId)
+        {
+
+            var userId = db.Requests.Where(r => r.Id == requestId).First().ApplicationUserId.ToString();
+
+            return userId;
         }
     }
 }

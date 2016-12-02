@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Shypp.Models;
+using Shypp.Services;
 using Microsoft.AspNet.Identity;
 
 namespace Shypp.Controllers
@@ -25,14 +26,46 @@ namespace Shypp.Controllers
         // GET: Commit/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Commit commit = db.Commits.Where(c =>
+                c.Id == id)
+                .FirstOrDefault();
+
+            return View(commit);
         }
 
         // GET: Commit/Add/5
         [Route("commit/add/{requestId}")]
         public ActionResult Add(int requestId)
         {
+            string userIdLogged = User.Identity.GetUserId();
+
+            var requestService = new RequestService();
+
+            string userIdRequest = requestService.getUserIdFromRequestId(requestId);
+
+            // redirect if user trying to commit to his own request
+
+            if (userIdLogged == userIdRequest)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            // redirect if user has already commited to this request
+
+            Commit commitOnDb = db.Commits.Where(co =>
+                    co.RequestId == requestId &&
+                    co.CourierId == userIdLogged)
+                    .FirstOrDefault();
+
+            if (commitOnDb != null)
+            {
+                return RedirectToAction("Details", new { id = commitOnDb.Id });
+            }
+
+            // Render View
+
             TempData["requestId"] = requestId;
+
             return View();
         }
 
@@ -41,10 +74,11 @@ namespace Shypp.Controllers
         [HttpPost]
         public ActionResult Add(Commit commit)
         {
+            // Validations
+
             if (!ModelState.IsValid)
             {
-                return Content("model not valid");
-                ViewData["Errors"] = "All the fields are required!";
+                TempData["Errors"] = "All the fields are required !!";
                 return RedirectToAction("Add");
             }
 
@@ -56,21 +90,48 @@ namespace Shypp.Controllers
 
             var rPriceEuros = Request["PriceEuros"];
 
-            if (rStart == "" || rDurationMinutes == "" || rPriceEuros == "")
+            if (int.Parse(rDurationMinutes) <= 0 || int.Parse(rPriceEuros) <= 0)
             {
-                ViewData["Errors"] = "All the fields are required!";
+                TempData["Errors"] = "Negative values are not allowed.";
                 return RedirectToAction("Add");
             }
+
+            // Validate Date
 
             DateTime rStartDate = DateTime.Parse(rStart);
 
             if (rStartDate < DateTime.Now)
             {
-                ViewData["Errors"] = "Invalid date!";
+                TempData["Errors"] = "Invalid date!";
                 return RedirectToAction("Add");
             }
 
-            ViewData["Success"] = "Invalid date!";
+            // Store
+
+            string CourierId = User.Identity.GetUserId();
+
+            Commit c = new Commit();
+
+            c.CourierId = CourierId;
+
+            c.RequestId = int.Parse(rRequestId);
+
+            c.Executed = false;
+
+            c.Accepted = false;
+
+            c.Start = rStartDate;
+
+            c.DurationMinutes = int.Parse(rDurationMinutes);
+
+            c.PriceEuros = float.Parse(rPriceEuros);
+
+            db.Commits.Add(c);
+
+            db.SaveChanges();
+
+            TempData["Success"] = "You have successfully created a commit!";
+
             return RedirectToAction("Add");
 
         }

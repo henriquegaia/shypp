@@ -43,10 +43,10 @@ namespace Shypp.Controllers
             }
             var requestUserId = request.ApplicationUserId;
             var loggedUserId = User.Identity.GetUserId();
-            if (requestUserId != loggedUserId)
-            {
-                return RedirectToAction("Index");
-            }
+            //if (requestUserId != loggedUserId)
+            //{
+            //    return RedirectToAction("Index");
+            //}
             return View(request);
         }
 
