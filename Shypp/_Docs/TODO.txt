@@ -20,7 +20,8 @@ ERRORS
 HIGH
 ===========================================================================================
 
-	-model Delivery
+	-list of commits per request
+		-pass view model to request/index
 
 	-for following models, bootstrap
 		-Classes & Status:

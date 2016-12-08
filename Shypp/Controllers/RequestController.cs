@@ -7,6 +7,7 @@ using Shypp.Models;
 using Microsoft.AspNet.Identity;
 using Shypp.Services;
 using System.IO;
+using Shypp.ViewModels;
 
 
 namespace Shypp.Controllers
@@ -25,7 +26,18 @@ namespace Shypp.Controllers
         {
             var userId = User.Identity.GetUserId();
             List<Request> requests = db.Requests.Where(r => r.ApplicationUserId == userId).ToList();
-            return View(requests);
+
+            //todo: list commits 
+            var commitService = new CommitService();
+            List<Commit> commits = commitService.getCommitsByRequests(requests);
+
+            var viewModel = new RequestCommit()
+            {
+                Commits = commits,
+                Requests = requests
+            };
+
+            return View(viewModel);
         }
 
         // ---------------------------------------------------------------------------------------
