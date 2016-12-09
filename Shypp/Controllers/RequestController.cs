@@ -34,7 +34,9 @@ namespace Shypp.Controllers
             var viewModel = new RequestCommit()
             {
                 Commits = commits,
-                Requests = requests
+                Requests = requests,
+                Commit = new Commit() { },
+                Request = new Request() { }
             };
 
             return View(viewModel);

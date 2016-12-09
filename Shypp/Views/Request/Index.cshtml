@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Shypp.Models.Request>
+﻿@model Shypp.ViewModels.RequestCommit
 
 @{
     ViewBag.Title = "Index";
@@ -10,36 +10,60 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
+
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.User.Email)
+            @Html.DisplayNameFor(modelItem => Model.Request.User.Email)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MaxDaysResponse)
+            @Html.DisplayNameFor(modelIten => Model.Request.MaxDaysResponse)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PriceEuros)
+            @Html.DisplayNameFor(modelItem => Model.Request.PriceEuros)
         </th>
         <th></th>
+        <th>Commits</th>
+
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.User.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MaxDaysResponse)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PriceEuros)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var request in Model.Requests)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => request.User.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => request.MaxDaysResponse)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => request.PriceEuros)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = request.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = request.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = request.Id })
+            </td>
+
+            <td>
+
+                @foreach (var commit in Model.Commits)
+                {
+                    if (commit.RequestId == request.Id)
+                    {
+                        @:From
+                        @commit.Courier.Email
+                        <a href="Commit/Details/@commit.Id">
+                            Details
+                        </a>
+                        <br />
+                    }
+
+                    <br />
+                }
+            </td>
+        </tr>
+    }
 
 </table>
+
+

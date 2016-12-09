@@ -20,9 +20,6 @@ ERRORS
 HIGH
 ===========================================================================================
 
-	-list of commits per request
-		-pass view model to request/index
-
 	-for following models, bootstrap
 		-Classes & Status:
 			-Address			-> OK
@@ -31,6 +28,7 @@ HIGH
 			-Photo				-> NA
 			-User				-> NA
 			-Commit				-> OK	
+			-Delivery			->		Next
 
 
 	-ON DELETE
