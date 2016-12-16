@@ -13,6 +13,10 @@
 
     <tr>
         <th>
+            Id
+        </th>
+
+        <th>
             @Html.DisplayNameFor(modelItem => Model.Request.User.Email)
         </th>
         <th>
@@ -30,6 +34,9 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => request.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => request.User.Email)
             </td>
             <td>
@@ -45,25 +52,48 @@
             </td>
 
             <td>
+                @{
+                    var requestExecuted = false;
+                }
 
                 @foreach (var commit in Model.Commits)
                 {
                     if (commit.RequestId == request.Id)
                     {
-                        @:From
-                        @commit.Courier.Email
-                        <a href="Commit/Details/@commit.Id">
-                            Details
-                        </a>
+                        if (commit.Executed == true)
+                        {
+                            requestExecuted = true;
+                            break;
+                        }
+                    }
+
+                }
+
+                @if (requestExecuted == false)
+                {
+                    foreach (var commit in Model.Commits)
+                    {
+                        if (commit.RequestId == request.Id)
+                        {
+                            @:From
+                            @commit.Courier.Email
+                            <a href="Commit/Details/@commit.Id">
+                                Details
+                            </a>
+                            if (commit.Accepted == true)
+                            {
+                                <b>Accepted</b>
+                            }
+                            <br />
+                        }
+
                         <br />
                     }
 
-                    <br />
                 }
+
             </td>
         </tr>
-    }
+                    }
 
 </table>
-
-

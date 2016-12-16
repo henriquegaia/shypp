@@ -179,5 +179,16 @@ namespace Shypp.Controllers
                 return View();
             }
         }
+
+        public ActionResult Accept(int id)
+        {
+            Commit commit = db.Commits.Find(id);
+
+            commit.Accepted = true;
+
+            db.SaveChanges();
+
+            return RedirectToAction("Details", new { id = id });
+        }
     }
 }

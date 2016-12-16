@@ -6,11 +6,11 @@
     <dl class="dl-horizontal">
 
         <dt>
-            @Html.DisplayNameFor(model => model.Request.User.Email)
+            Courier Email
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Request.User.Email)
+            @Html.DisplayFor(model => model.Courier.Email)
         </dd>
 
         <dt>
@@ -71,12 +71,22 @@
 
         <dd>
 
-        <p></p>
+            <p></p>
 
         </dd>
 
         <dt>
-            @Html.ActionLink("Request", "Details", "Request", new { id = Model.Request.Id }, null)
+            @Html.ActionLink("View Request", "Details", "Request", new { id = Model.Request.Id }, null)
+        </dt>
+
+        <dd>
+
+            <p></p>
+
+        </dd>
+
+        <dt>
+            @Html.ActionLink("Accept Commit", "Accept", "Commit", new { id = Model.Id }, null)
         </dt>
 
         <p></p>

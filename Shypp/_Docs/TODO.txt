@@ -20,6 +20,38 @@ ERRORS
 HIGH
 ===========================================================================================
 
+	-doubt: show accept/decline commit on commit.details or request.index?
+
+	-request.index: accept/decline a commit
+		-show accept link if 
+			-accept == 0
+			-&&
+			-user logged is the client who made the request
+			-&&
+			-no commit for the request has yet been accepted
+		-show decline link if
+			-accept == 1
+			-&&
+			-user logged is the client who made the request
+
+
+	-request.index (if executed = 0)
+		-if: request maximum response days not passed
+			-if: commit date has not passed
+				-on request.index add link to accept
+					-ask for confirmation
+					-change accepted to 1
+					-send email to courier
+					-add note on request.index that delivery is pending
+			-else: don't add link to accept commit and remove commit entry on requests list
+		-else:	add a note on request and on commit that the client time has expired, 
+				but allow every operation
+
+	-execute delivery
+		-change executed to 1
+		-move request from list of client to executed requests
+		-move commit from list of courier to executed
+	
 	-for following models, bootstrap
 		-Classes & Status:
 			-Address			-> OK
@@ -28,8 +60,11 @@ HIGH
 			-Photo				-> NA
 			-User				-> NA
 			-Commit				-> OK	
-			-Delivery			->		Next
-
+			-Delivery				
+				-create get		-> NEXT
+				-create post
+				-index
+				-details
 
 	-ON DELETE
 		-Vehicle
