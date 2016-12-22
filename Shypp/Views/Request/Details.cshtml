@@ -11,7 +11,15 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.User.Email)
+            Request id
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            Client Email
         </dt>
 
         <dd>
@@ -45,11 +53,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model=>model.PriceEuros)
+            @Html.DisplayNameFor(model => model.PriceEuros)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model=>model.PriceEuros)
+            @Html.DisplayFor(model => model.PriceEuros)
         </dd>
 
         @foreach (var photo in ViewBag.photos)

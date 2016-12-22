@@ -20,16 +20,7 @@ ERRORS
 HIGH
 ===========================================================================================
 
-	-/Commit/Details/5 not allowing to deny/accept commit
-
-	-commit.details: accept/decline a commit
-		-if user logged is the client who made the request
-			-show accept link if 
-				-accept == 0
-				-&&
-				-no commit for the request has yet been accepted
-			-show decline link if
-				-accept == 1
+	-show accept choice if client hasn't accepted any
 
 	-request.index (if executed = 0)
 		-if: request maximum response days not passed

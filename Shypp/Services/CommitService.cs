@@ -16,16 +16,32 @@ namespace Shypp.Services
 
             foreach (Request request in Requests)
             {
-                Commit commit = db.Commits.Where(c => c.RequestId == request.Id).FirstOrDefault();
+                List<Commit> commitsByRequest = db.Commits.Where(c => c.RequestId == request.Id).ToList();
 
-                if (commit != null)
+                if (commitsByRequest != null)
                 {
-                    commits.Add(commit);
+                    commits.AddRange(commitsByRequest);
                 }
             }
 
             return commits;
 
+        }
+
+        public bool checkRequestHasAcceptedCommit(int requestId)
+        {
+
+            Commit commit = db.Commits.Where(c =>
+            c.RequestId == requestId &&
+            c.Accepted == true
+            ).FirstOrDefault();
+
+            if (commit == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

@@ -79,11 +79,13 @@
     </dl>
 </div>
 
+@ViewData["requestHasAcceptedCommit"]
+
 <div class="alert alert-success">
     @Html.ActionLink("View Request", "Details", "Request", new { id = Model.Request.Id }, null)
 </div>
 
-@if (ViewData["userOwnsRequest"].ToString() == "True")
+@if (ViewData["userOwnsRequest"].ToString() == "True" && ViewData["requestHasAcceptedCommit"].ToString() == "False")
 {
     if (Model.Accepted == false)
     {
@@ -91,7 +93,11 @@
             @Html.ActionLink("Accept Commit", "AcceptOrDecline", "Commit", new { id = Model.Id, accepted = true }, null)
         </div>
     }
+    
+}
 
+@if (ViewData["userOwnsRequest"].ToString() == "True")
+{
     if (Model.Accepted == true)
     {
         <div class="alert alert-warning">

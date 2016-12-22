@@ -25,10 +25,11 @@ namespace Shypp.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
+
             List<Request> requests = db.Requests.Where(r => r.ApplicationUserId == userId).ToList();
 
-            //todo: list commits 
             var commitService = new CommitService();
+
             List<Commit> commits = commitService.getCommitsByRequests(requests);
 
             var viewModel = new RequestCommit()
@@ -48,19 +49,22 @@ namespace Shypp.Controllers
         public ActionResult Details(int id)
         {
             var request = db.Requests.Find(id);
+
             var photoService = new PhotoService();
+
             var photos = photoService.getPhotosByRequest(id);
+
             ViewBag.photos = photos;
+
             if (request == null)
             {
                 return RedirectToAction("Index");
             }
+
             var requestUserId = request.ApplicationUserId;
+
             var loggedUserId = User.Identity.GetUserId();
-            //if (requestUserId != loggedUserId)
-            //{
-            //    return RedirectToAction("Index");
-            //}
+
             return View(request);
         }
 
@@ -80,9 +84,11 @@ namespace Shypp.Controllers
             }
 
             var userId = User.Identity.GetUserId();
-            //TODO: Should be a call to a service
+
             List<Address> addresses = db.Addresses.Where(a => a.ApplicationUserId == userId).ToList();
+
             ViewBag.Addresses2 = new SelectList(addresses, "Id", "City");
+
             ViewBag.Addresses = addresses;
             return View();
         }

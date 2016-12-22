@@ -30,9 +30,15 @@ namespace Shypp.Controllers
                 c.Id == id)
                 .FirstOrDefault();
 
+            var commitService = new CommitService();
+
+            bool requestHasAcceptedCommit = commitService.checkRequestHasAcceptedCommit(commit.RequestId);
+
             string loggedUserId = User.Identity.GetUserId();
 
             ViewData["userOwnsRequest"] = false;
+
+            ViewData["requestHasAcceptedCommit"] = requestHasAcceptedCommit;
 
             if (commit.Request.User.Id == loggedUserId)
             {
