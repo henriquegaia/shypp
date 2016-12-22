@@ -30,6 +30,15 @@ namespace Shypp.Controllers
                 c.Id == id)
                 .FirstOrDefault();
 
+            string loggedUserId = User.Identity.GetUserId();
+
+            ViewData["userOwnsRequest"] = false;
+
+            if (commit.Request.User.Id == loggedUserId)
+            {
+                ViewData["userOwnsRequest"] = true;
+            }
+
             return View(commit);
         }
 
@@ -180,13 +189,27 @@ namespace Shypp.Controllers
             }
         }
 
-        public ActionResult Accept(int id)
+        //public ActionResult Accept(int id)
+        //{
+        //    Commit commit = db.Commits.Find(id);
+
+        //    commit.Accepted = true;
+
+        //    db.SaveChanges();
+
+        //    return RedirectToAction("Details", new { id = id });
+        //}
+
+        public ActionResult AcceptOrDecline(int id, bool accepted)
         {
             Commit commit = db.Commits.Find(id);
 
-            commit.Accepted = true;
+            if (commit.Accepted != accepted)
+            {
+                commit.Accepted = accepted;
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
 
             return RedirectToAction("Details", new { id = id });
         }

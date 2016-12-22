@@ -6,13 +6,20 @@
     <dl class="dl-horizontal">
 
         <dt>
-            Courier Email
+            Email - Courier
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Courier.Email)
         </dd>
 
+        <dt>
+            Email - Client
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model=>model.Request.User.Email)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Executed)
         </dt>
@@ -69,30 +76,30 @@
             @Html.DisplayFor(model => model.Request.AddressDestiny.City)
         </dd>
 
-        <dd>
-
-            <p></p>
-
-        </dd>
-
-        <dt>
-            @Html.ActionLink("View Request", "Details", "Request", new { id = Model.Request.Id }, null)
-        </dt>
-
-        <dd>
-
-            <p></p>
-
-        </dd>
-
-        <dt>
-            @Html.ActionLink("Accept Commit", "Accept", "Commit", new { id = Model.Id }, null)
-        </dt>
-
-        <p></p>
-
     </dl>
 </div>
+
+<div class="alert alert-success">
+    @Html.ActionLink("View Request", "Details", "Request", new { id = Model.Request.Id }, null)
+</div>
+
+@if (ViewData["userOwnsRequest"].ToString() == "True")
+{
+    if (Model.Accepted == false)
+    {
+        <div class="alert alert-info">
+            @Html.ActionLink("Accept Commit", "AcceptOrDecline", "Commit", new { id = Model.Id, accepted = true }, null)
+        </div>
+    }
+
+    if (Model.Accepted == true)
+    {
+        <div class="alert alert-warning">
+            @Html.ActionLink("Decline Commit", "AcceptOrDecline", "Commit", new { id = Model.Id, accepted = false }, null)
+        </div>
+    }
+}
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
