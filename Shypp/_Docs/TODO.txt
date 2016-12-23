@@ -15,29 +15,18 @@ ERRORS
 				constraints: new { requestId = @"\d+" }
             );
 
-
 ===========================================================================================
 HIGH
 ===========================================================================================
 
-	-show accept choice if client hasn't accepted any
-
-	-request.index (if executed = 0)
-		-if: request maximum response days not passed
-			-if: commit date has not passed
-				-on request.index add link to accept
-					-ask for confirmation
-					-change accepted to 1
-					-send email to courier
-					-add note on request.index that delivery is pending
-			-else: don't add link to accept commit and remove commit entry on requests list
-		-else:	add a note on request and on commit that the client time has expired, 
-				but allow every operation
-
 	-execute delivery
-		-change executed to 1
-		-move request from list of client to executed requests
-		-move commit from list of courier to executed
+		-courier sends signal to indicate that he has delivered		
+		-save delivery to db (DELIVERYCONTROLLER.CREATE -----------------------NEXT)
+		-if client agrees
+			-change request.executed to 1
+			-add label 'executed' on request.index
+		-else if client doesn't agree
+			
 	
 	-for following models, bootstrap
 		-Classes & Status:
@@ -84,7 +73,17 @@ MEDIUM
 LOW
 ===========================================================================================
 
-
+-request.index (if executed = 0)
+		-if: request maximum response days not passed
+			-if: commit date has not passed
+				-on request.index add link to accept
+					-ask for confirmation
+					-change accepted to 1
+					-send email to courier
+					-add note on request.index that delivery is pending
+			-else: don't add link to accept commit and remove commit entry on requests list
+		-else:	add a note on request and on commit that the client time has expired, 
+				but allow every operation
 
 ===========================================================================================
 DOCS

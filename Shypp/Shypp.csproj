@@ -211,6 +211,10 @@
     <Compile Include="Migrations\201610131902070_AddressIdInRequestNoDeleteCascade.Designer.cs">
       <DependentUpon>201610131902070_AddressIdInRequestNoDeleteCascade.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612231708152_AlterTableDeliveries.cs" />
+    <Compile Include="Migrations\201612231708152_AlterTableDeliveries.Designer.cs">
+      <DependentUpon>201612231708152_AlterTableDeliveries.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
@@ -367,6 +371,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201610131902070_AddressIdInRequestNoDeleteCascade.resx">
       <DependentUpon>201610131902070_AddressIdInRequestNoDeleteCascade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612231708152_AlterTableDeliveries.resx">
+      <DependentUpon>201612231708152_AlterTableDeliveries.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

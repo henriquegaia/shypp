@@ -23,6 +23,7 @@ namespace Shypp.Controllers
         // GET: Delivery/Create
         public ActionResult Create()
         {
+            
             return View();
         }
 
@@ -30,6 +31,9 @@ namespace Shypp.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+            int commitId = int.Parse(Request["CommitId"]);
+
+            return Content(commitId.ToString());
             try
             {
                 // TODO: Add insert logic here

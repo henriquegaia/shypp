@@ -6,6 +6,22 @@
     <dl class="dl-horizontal">
 
         <dt>
+            Commit Id
+        </dt>
+
+        <dd>
+            @Model.Id
+        </dd>
+
+        <dt>
+            Request Id
+        </dt>
+
+        <dd>
+            @Model.RequestId
+        </dd>
+
+        <dt>
             Email - Courier
         </dt>
 
@@ -18,7 +34,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model=>model.Request.User.Email)
+            @Html.DisplayFor(model => model.Request.User.Email)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Executed)
@@ -79,8 +95,6 @@
     </dl>
 </div>
 
-@ViewData["requestHasAcceptedCommit"]
-
 <div class="alert alert-success">
     @Html.ActionLink("View Request", "Details", "Request", new { id = Model.Request.Id }, null)
 </div>
@@ -93,7 +107,7 @@
             @Html.ActionLink("Accept Commit", "AcceptOrDecline", "Commit", new { id = Model.Id, accepted = true }, null)
         </div>
     }
-    
+
 }
 
 @if (ViewData["userOwnsRequest"].ToString() == "True")
@@ -103,6 +117,25 @@
         <div class="alert alert-warning">
             @Html.ActionLink("Decline Commit", "AcceptOrDecline", "Commit", new { id = Model.Id, accepted = false }, null)
         </div>
+    }
+}
+
+@if (ViewData["userOwnsCommit"].ToString() == "True")
+{
+    if (Model.Accepted == true)
+    {
+
+        using (Html.BeginForm("Create", "Delivery", FormMethod.Post, new { CommitId = Model.Id }))
+        {
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="CommitId" value="@Model.Id"/>
+            <div class="form-group">
+                <div class="form-controll">
+                    <input type="submit" value="Inform Delivery Made!" class="btn btn-default" />
+                </div>
+            </div>
+
+        }
     }
 }
 

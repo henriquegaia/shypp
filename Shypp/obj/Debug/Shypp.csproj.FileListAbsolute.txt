@@ -82,3 +82,4 @@ C:\Users\ah e tal\Dropbox\Code\Code - Projects\aspNetMvc_shypp\Shypp\Shypp\obj\D
 C:\Users\ah e tal\Dropbox\Code\Code - Projects\aspNetMvc_shypp\Shypp\Shypp\obj\Debug\Shypp.pdb
 C:\Users\ah e tal\Dropbox\Code\Code - Projects\aspNetMvc_shypp\Shypp\Shypp\obj\Debug\Shypp.Migrations.AddressIdInRequestNoDeleteCascade.resources
 C:\Users\ah e tal\Dropbox\Code\Code - Projects\aspNetMvc_shypp\Shypp\Shypp\obj\Debug\Shypp.csproj.GenerateResource.Cache
+C:\Users\ah e tal\Dropbox\Code\Code - Projects\aspNetMvc_shypp\Shypp\Shypp\obj\Debug\Shypp.Migrations.AlterTableDeliveries.resources

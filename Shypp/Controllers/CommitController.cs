@@ -45,6 +45,13 @@ namespace Shypp.Controllers
                 ViewData["userOwnsRequest"] = true;
             }
 
+            ViewData["userOwnsCommit"] = false;
+
+            if(commit.CourierId == loggedUserId)
+            {
+                ViewData["userOwnsCommit"] = true;
+            }
+
             return View(commit);
         }
 
