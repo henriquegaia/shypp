@@ -15,10 +15,6 @@ namespace Shypp.Models
 
         // ----------------------------------------
 
-        [Required]
-        [Display(Name = "Client Received")]
-        public bool ClientReceived { get; set; }
-
         /*
          * ----------------------------------------
          * Nav Props

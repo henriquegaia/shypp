@@ -32,12 +32,19 @@ namespace Shypp.Controllers
 
             List<Commit> commits = commitService.getCommitsByRequests(requests);
 
+            var deliveryService = new DeliveryService();
+
+            List<int> commitsIdsIfCourierDelivered = deliveryService.getCommitsIdsIfCourierDelivered(commits);
+
+            return Content("number of deliveries that couriers informed that where made: " + commitsIdsIfCourierDelivered.Count.ToString());
+
             var viewModel = new RequestCommit()
             {
                 Commits = commits,
                 Requests = requests,
+                CommitsIdsIfCourierDelivered = commitsIdsIfCourierDelivered,
                 Commit = new Commit() { },
-                Request = new Request() { }
+                Request = new Request() { },
             };
 
             return View(viewModel);

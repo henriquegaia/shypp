@@ -21,8 +21,8 @@ HIGH
 
 	-execute delivery
 		-courier sends signal to indicate that he has delivered		
-		-save delivery to db (DELIVERYCONTROLLER.CREATE -----------------------NEXT)
-		-if client agrees
+			-save delivery to db (
+		-if client agrees	DELIVERYCONTROLLER.INDEX -----------------------NEXT)
 			-change request.executed to 1
 			-add label 'executed' on request.index
 		-else if client doesn't agree
@@ -37,9 +37,9 @@ HIGH
 			-User				-> NA
 			-Commit				-> OK	
 			-Delivery				
-				-create get		-> NEXT
-				-create post
-				-index
+				-create get		-> NA
+				-create post	-> OK
+				-index			-> NEXT
 				-details
 
 	-ON DELETE

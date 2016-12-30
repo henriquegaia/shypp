@@ -6,6 +6,12 @@
 <table class="table">
     <tr>
         <th>
+            Commit Id
+        </th>
+        <th>
+            Request Id
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Request.User.Email)
         </th>
         <th>
@@ -28,6 +34,8 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>@item.Id</td>
+        <td>@item.RequestId</td>
         <td>
             @Html.DisplayFor(modelItem => item.Request.User.Email)
         </td>

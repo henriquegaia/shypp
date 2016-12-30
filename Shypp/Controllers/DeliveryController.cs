@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Shypp.Models;
 
 namespace Shypp.Controllers
 {
     public class DeliveryController : Controller
     {
+
+        ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: Delivery
         public ActionResult Index()
         {
@@ -23,7 +27,7 @@ namespace Shypp.Controllers
         // GET: Delivery/Create
         public ActionResult Create()
         {
-            
+
             return View();
         }
 
@@ -33,17 +37,25 @@ namespace Shypp.Controllers
         {
             int commitId = int.Parse(Request["CommitId"]);
 
-            return Content(commitId.ToString());
             try
             {
-                // TODO: Add insert logic here
+                Delivery delivery = new Delivery()
+                {
+                    CommitId = commitId
+                };
 
-                return RedirectToAction("Index");
+                db.Deliveries.Add(delivery);
+
+                db.SaveChanges();
+
+                TempData["DeliveryMsg"] = "Successfully informed about delivery!";
             }
             catch
             {
-                return View();
+                TempData["DeliveryMsg"] = "You have already informed about this delivery!";
             }
+
+            return RedirectToAction("Details/" + commitId, "Commit");
         }
 
         // GET: Delivery/Edit/5

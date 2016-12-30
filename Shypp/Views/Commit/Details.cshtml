@@ -3,6 +3,20 @@
 <div>
     <h4>Commit</h4>
     <hr />
+
+    @if (TempData.ContainsKey("DeliveryMsg"))
+    {
+        <div class="alert alert-info">
+            @TempData["DeliveryMsg"];
+        </div>
+    }
+    else
+    {
+        <p>
+            TempData not set
+        </p>
+    }
+
     <dl class="dl-horizontal">
 
         <dt>
@@ -128,7 +142,7 @@
         using (Html.BeginForm("Create", "Delivery", FormMethod.Post, new { CommitId = Model.Id }))
         {
             @Html.AntiForgeryToken()
-            <input type="hidden" name="CommitId" value="@Model.Id"/>
+            <input type="hidden" name="CommitId" value="@Model.Id" />
             <div class="form-group">
                 <div class="form-controll">
                     <input type="submit" value="Inform Delivery Made!" class="btn btn-default" />
