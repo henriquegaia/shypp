@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Shypp.Models;
+using Shypp.Services;
 
 namespace Shypp.Controllers
 {
@@ -37,6 +38,8 @@ namespace Shypp.Controllers
         {
             int commitId = int.Parse(Request["CommitId"]);
 
+            var CommitService = new CommitService();
+
             try
             {
                 Delivery delivery = new Delivery()
@@ -47,6 +50,12 @@ namespace Shypp.Controllers
                 db.Deliveries.Add(delivery);
 
                 db.SaveChanges();
+
+                // get requestId
+
+                CommitService.setCommitExecuted(commitId);
+
+                // Set Request as Executed
 
                 TempData["DeliveryMsg"] = "Successfully informed about delivery!";
             }

@@ -24,28 +24,29 @@ namespace Shypp.Controllers
         // GET: Request
         public ActionResult Index()
         {
-            var userId = User.Identity.GetUserId();
-
-            List<Request> requests = db.Requests.Where(r => r.ApplicationUserId == userId).ToList();
-
             var commitService = new CommitService();
-
-            List<Commit> commits = commitService.getCommitsByRequests(requests);
 
             var deliveryService = new DeliveryService();
 
+            var userId = User.Identity.GetUserId();
+
+            List<Request> requests = db.Requests.Where(r => r.ApplicationUserId == userId).ToList();           
+
+            List<Commit> commits = commitService.getCommitsByRequests(requests);
+
             List<int> commitsIdsIfCourierDelivered = deliveryService.getCommitsIdsIfCourierDelivered(commits);
 
-            return Content("number of deliveries that couriers informed that where made: " + commitsIdsIfCourierDelivered.Count.ToString());
+            //string commitsIdsIfCourierDeliveredToString = String.Join(", ", commitsIdsIfCourierDelivered.ToArray());
 
             var viewModel = new RequestCommit()
             {
                 Commits = commits,
                 Requests = requests,
-                CommitsIdsIfCourierDelivered = commitsIdsIfCourierDelivered,
                 Commit = new Commit() { },
                 Request = new Request() { },
             };
+
+            ViewData["commitsIdsIfCourierDelivered"] = commitsIdsIfCourierDelivered;
 
             return View(viewModel);
         }

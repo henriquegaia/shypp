@@ -43,5 +43,21 @@ namespace Shypp.Services
 
             return true;
         }
+
+        public int getRequestIdByCommitId(int commitId)
+        {
+            Commit commit = db.Commits.Where(c => c.Id == commitId).FirstOrDefault();
+
+            return commit.RequestId;
+        }
+
+        public void setCommitExecuted(int commitId)
+        {
+            Commit commit = db.Commits.Find(commitId);
+
+            commit.Executed = true;
+
+            db.SaveChanges();
+        }
     }
 }

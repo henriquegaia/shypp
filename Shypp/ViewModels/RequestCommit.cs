@@ -12,15 +12,9 @@ namespace Shypp.ViewModels
 
         public List<Commit> Commits { get; set; }
 
-        public List<int> CommitsIdsIfCourierDelivered { get; set; }
-
-
-
-
         public Commit Commit { get; set; }
 
         public Request Request { get; set; }
 
-        public int CommitIdIfCourierDelivered { get; set; }
     }
 }

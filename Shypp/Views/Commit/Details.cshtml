@@ -10,12 +10,6 @@
             @TempData["DeliveryMsg"];
         </div>
     }
-    else
-    {
-        <p>
-            TempData not set
-        </p>
-    }
 
     <dl class="dl-horizontal">
 
@@ -132,6 +126,8 @@
             @Html.ActionLink("Decline Commit", "AcceptOrDecline", "Commit", new { id = Model.Id, accepted = false }, null)
         </div>
     }
+
+    
 }
 
 @if (ViewData["userOwnsCommit"].ToString() == "True")
