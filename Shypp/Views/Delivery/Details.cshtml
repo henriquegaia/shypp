@@ -1,0 +1,28 @@
+﻿@model Shypp.Models.Delivery
+
+<div>
+    <h4>Delivery</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Commit Id
+        </dt>
+
+
+        <dd>
+            @Html.DisplayFor(model => model.Commit.Id)
+        </dd>
+
+        <dt>
+            Request Id
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commit.RequestId)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CommitId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

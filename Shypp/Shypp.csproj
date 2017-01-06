@@ -356,11 +356,12 @@
     <Content Include="Views\Commit\Add.cshtml" />
     <Content Include="Views\Commit\Index.cshtml" />
     <Content Include="Views\Commit\Details.cshtml" />
+    <Content Include="Views\Delivery\Index.cshtml" />
+    <Content Include="Views\Delivery\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Upload\Photos\Request\" />
-    <Folder Include="Views\Delivery\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

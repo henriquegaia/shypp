@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Shypp.Models.Delivery>
+
+<table class="table">
+    <tr>
+        <th>
+            Commit Id
+        </th>
+        <th>
+            Request Id
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Commit.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Commit.RequestId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CommitId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CommitId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.CommitId })
+            </td>
+        </tr>
+    }
+
+</table>

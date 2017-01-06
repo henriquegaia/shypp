@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using Shypp.Models;
 using Shypp.Services;
+using Microsoft.AspNet.Identity;
 
 namespace Shypp.Controllers
 {
+    [Authorize]
     public class DeliveryController : Controller
     {
 
@@ -16,13 +18,19 @@ namespace Shypp.Controllers
         // GET: Delivery
         public ActionResult Index()
         {
-            return View();
+            string userId = User.Identity.GetUserId();
+
+            List<Delivery> deliveries = db.Deliveries.Where(d=>d.Commit.CourierId == userId).ToList();
+
+            return View(deliveries);
         }
 
         // GET: Delivery/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Delivery delivery = db.Deliveries.Find(id);
+
+            return View(delivery);
         }
 
         // GET: Delivery/Create
